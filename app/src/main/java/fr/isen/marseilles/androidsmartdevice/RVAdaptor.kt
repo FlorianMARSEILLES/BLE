@@ -1,13 +1,13 @@
 package fr.isen.marseilles.androidsmartdevice
 
+import android.bluetooth.BluetoothDevice
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
-class RVAdaptor(private val items:ArrayList<String>) : RecyclerView.Adapter<RVAdaptor.ViewHolder>(){
+class RVAdaptor(private val items : ArrayList<BluetoothDevice>, var onDeviceClickListener: (BluetoothDevice) -> Unit) : RecyclerView.Adapter<RVAdaptor.ViewHolder>(){
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         //textView view
         val textView : TextView = itemView.findViewById(R.id.textrc)
@@ -21,11 +21,29 @@ class RVAdaptor(private val items:ArrayList<String>) : RecyclerView.Adapter<RVAd
 
     override fun onBindViewHolder(holder: RVAdaptor.ViewHolder, position: Int) {
         // bind data with the viewHolder
-        holder.textView.text = items[position]
+        holder.textView.text = items[position].address
+        holder.itemView.setOnClickListener{
+            onDeviceClickListener(items[position])
+        }
     }
 
     override fun getItemCount(): Int {
         //return size of items
         return items.size
+    }
+
+
+    fun addDevice(device: BluetoothDevice) {
+        var shouldAddDevice = true
+        items.forEachIndexed { index, element ->
+            if (element.address == device.address) {
+                items[index] = device
+                shouldAddDevice= false
+                }
+            }
+        if(shouldAddDevice){
+            items.add(device)
+        }
+
     }
 }
