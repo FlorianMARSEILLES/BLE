@@ -23,6 +23,7 @@ class RVAdaptor(private val items : ArrayList<BluetoothDevice>, var onDeviceClic
     override fun onBindViewHolder(holder: RVAdaptor.ViewHolder, position: Int) {
         // bind data with the viewHolder
         holder.textView.text = items[position].address
+        //holder.textView.text = items[position].name
         holder.itemView.setOnClickListener{
             onDeviceClickListener(items[position])
         }
