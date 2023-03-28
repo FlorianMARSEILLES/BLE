@@ -5,4 +5,5 @@
     <string name="main_button_text">Commencer</string>
     <string name="scan_text">Lancer le Scan BLE</string>
     <string name="onchangetext">Scan en cours</string>
+    <string name="textProgress">Connexion BLE en cours</string>
 </resources>
