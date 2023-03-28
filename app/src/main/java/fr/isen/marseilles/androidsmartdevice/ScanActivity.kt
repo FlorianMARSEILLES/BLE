@@ -48,11 +48,13 @@ class ScanActivity : AppCompatActivity() {
     private val handler = Handler(Looper.getMainLooper())
 
     @SuppressLint("MissingPermission")
-    override fun onStop(){
+    fun stopScan(){
         super.onStop()
         if(bluetoothAdapter.isEnabled && allPermissionGranted()){
+            adapter.clearData()
             scanning = false
             bluetoothAdapter.bluetoothLeScanner?.stopScan(leScanCallback)
+
         }
     }
 
@@ -71,22 +73,13 @@ class ScanActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-        if (bluetoothAdapter.isEnabled == true) {
-            scandeviceWithPermission()
+        if (bluetoothAdapter.isEnabled) {
+            initToggleAction()
         } else {
             handleBLENotAvailable()
         }
 
-        val scanText = findViewById<TextView>(R.id.scanText)
-        scanText.text = getString(R.string.scan_text)
 
-        val imageView = findViewById<ImageView>(R.id.imageViewPlay)
-        val scanprogressBar = findViewById<ProgressBar>(R.id.progressbarScan)
-        scanprogressBar.visibility = View.VISIBLE
-        scanprogressBar.isIndeterminate = false
-        imageView.setOnClickListener {
-            togglePlayPauseAction()
-        }
         // set all layout of the recycler view
 
     }
@@ -108,17 +101,6 @@ class ScanActivity : AppCompatActivity() {
         Toast.makeText(this, "Bluetooth is not available on this device", Toast.LENGTH_SHORT).show()
         finish()
     }
-
-
-
-    fun fetchData(): ArrayList<String> {
-        val list = ArrayList<String>()
-        for (i in 0 until 20) {
-            list.add("Item $i")
-        }
-        return list
-    }
-
     companion object{
         val PERMISSION_REQUEST_CODE =1
         val SCAN_PERIOD : Long = 10000
@@ -196,17 +178,28 @@ class ScanActivity : AppCompatActivity() {
             imageView.setImageResource(R.drawable.play)
             scanprogressBar.isIndeterminate = false
             isPlaying = false
+            stopScan()
         } else {
             // Play button clicked
             scanText.text = getString(R.string.onchangetext)
             imageView.setImageResource(R.drawable.pause)
             scanprogressBar.isIndeterminate = true
+            scandeviceWithPermission()
             isPlaying = true
         }
     }
 
     private fun initToggleAction(){
+        val scanText = findViewById<TextView>(R.id.scanText)
+        scanText.text = getString(R.string.scan_text)
 
+        val imageView = findViewById<ImageView>(R.id.imageViewPlay)
+        val scanprogressBar = findViewById<ProgressBar>(R.id.progressbarScan)
+        scanprogressBar.visibility = View.VISIBLE
+        scanprogressBar.isIndeterminate = false
+        imageView.setOnClickListener {
+            togglePlayPauseAction()
+        }
     }
 
 

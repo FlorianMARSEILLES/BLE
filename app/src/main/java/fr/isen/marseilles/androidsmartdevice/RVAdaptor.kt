@@ -1,5 +1,6 @@
 package fr.isen.marseilles.androidsmartdevice
 
+import android.annotation.SuppressLint
 import android.bluetooth.BluetoothDevice
 import android.view.LayoutInflater
 import android.view.View
@@ -45,5 +46,11 @@ class RVAdaptor(private val items : ArrayList<BluetoothDevice>, var onDeviceClic
             items.add(device)
         }
 
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun clearData() {
+        items.clear()
+        notifyDataSetChanged()
     }
 }
