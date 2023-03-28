@@ -202,7 +202,7 @@ class ScanActivity : AppCompatActivity() {
         }
     }
     //salut
-
+    //lol
 
 
 }
