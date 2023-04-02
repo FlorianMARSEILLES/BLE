@@ -1,62 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ScanActivity">
+    android:background="@drawable/background_radiant">
 
-    <TextView
-        android:id="@+id/scanText"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:text="TextView"
-        android:textAlignment="textStart"
-        android:textColor="#3F51B5"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.112" />
+        android:background="@drawable/rounded_background"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp">
 
-    <ImageView
-        android:id="@+id/imageViewPlay"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.714"
-        app:layout_constraintStart_toEndOf="@+id/scanText"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.11"
-        app:srcCompat="@drawable/play" />
+        <ImageView
+            android:id="@+id/imageViewPlay"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="16dp"
+            app:srcCompat="@drawable/play" />
 
-    <ProgressBar
-        android:id="@+id/progressbarScan"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="#3F51B5"
-        android:indeterminate="true"
-        android:indeterminateTint="#3F51B5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scanText"
-        app:layout_constraintVertical_bias="0.0" />
+        <TextView
+            android:id="@+id/scanText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="16dp"
+            android:layout_toStartOf="@id/imageViewPlay"
+            android:text="TextView"
+            android:textAlignment="textStart"
+            android:textColor="#3F51B5"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            tools:ignore="RtlCompat" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerviewScan"
-        android:layout_width="0dp"
-        android:layout_height="565dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressbarScan" />
+        <ProgressBar
+            android:id="@+id/progressbarScan"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/scanText"
+            android:layout_margin="16dp"
+            android:backgroundTint="#3F51B5"
+            android:indeterminate="true"
+            android:indeterminateTint="#3F51B5" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerviewScan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            android:layout_below="@+id/progressbarScan"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:background="#FFFFFF"
+            android:padding="8dp"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="8dp"
+            app:cardBackgroundColor="#F5F5F5"
+            app:contentPadding="8dp" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

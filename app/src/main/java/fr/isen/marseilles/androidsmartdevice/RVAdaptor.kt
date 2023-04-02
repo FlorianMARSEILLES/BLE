@@ -12,6 +12,7 @@ class RVAdaptor(private val items : ArrayList<BluetoothDevice>, var onDeviceClic
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         //textView view
         val textView : TextView = itemView.findViewById(R.id.textrc)
+        val textView2 : TextView = itemView.findViewById(R.id.titleRC)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RVAdaptor.ViewHolder {
@@ -20,8 +21,10 @@ class RVAdaptor(private val items : ArrayList<BluetoothDevice>, var onDeviceClic
         return ViewHolder(view)
     }
 
+    @SuppressLint("MissingPermission")
     override fun onBindViewHolder(holder: RVAdaptor.ViewHolder, position: Int) {
         // bind data with the viewHolder
+        holder.textView2.text = items[position].name ?:"inconnu"
         holder.textView.text = items[position].address
         //holder.textView.text = items[position].name
         holder.itemView.setOnClickListener{
@@ -41,8 +44,8 @@ class RVAdaptor(private val items : ArrayList<BluetoothDevice>, var onDeviceClic
             if (element.address == device.address) {
                 items[index] = device
                 shouldAddDevice= false
-                }
             }
+        }
         if(shouldAddDevice){
             items.add(device)
         }
