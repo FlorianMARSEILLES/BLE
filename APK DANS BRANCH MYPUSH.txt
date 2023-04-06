@@ -1,1 +1,2 @@
-La branche "MyPush" Contient l'ensemble de mon travail, Je n'ai pas réussi à push dans le Master Branch
+La branche "MyPush" Contient l'ensemble de mon travail, je n'ai pas réussi à push dans le Master Branch
+ReadME remplis et mis à disposition.
