@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import android.bluetooth.*
+import android.widget.CheckBox
 import org.w3c.dom.Text
 import java.util.*
 
@@ -23,7 +24,7 @@ class DeviceActivity : AppCompatActivity() {
     private val serviceUUID = UUID.fromString("0000feed-cc7a-482a-984a-7f2ed5b3e58f")
     private val characteristicLedUUID = UUID.fromString("0000abcd-8e22-4541-9d4c-21edae82ed19")
     private val characteristicButtonUUID = UUID.fromString("00001234-8e22-4541-9d4c-21edae82ed19")
-    private var cptClick=0
+    private var cptClick=0 //utilisé pour la partie compteur que je n'ai pas réussi à achever
     @SuppressLint("MissingPermission", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -136,6 +137,9 @@ class DeviceActivity : AppCompatActivity() {
         val textNL = findViewById<TextView>(R.id.textNL)
         textNL.text = "Abonnez-vous a cette NewsLetter"
 
+        val check = findViewById<CheckBox>(R.id.checkBox)
+
+        check.isVisible = true
         iconLED1.isVisible = true
         iconLED2.isVisible = true
         iconLED3.isVisible = true

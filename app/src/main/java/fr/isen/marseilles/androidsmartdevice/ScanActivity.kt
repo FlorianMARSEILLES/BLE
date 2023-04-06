@@ -201,8 +201,7 @@ class ScanActivity : AppCompatActivity() {
             togglePlayPauseAction()
         }
     }
-    //salut
-    //lol
+
 
 
 }
