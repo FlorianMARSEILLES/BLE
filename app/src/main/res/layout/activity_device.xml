@@ -67,4 +67,36 @@
         app:layout_constraintTop_toTopOf="@+id/iconLED2"
         app:srcCompat="@drawable/baseline_lightbulb_24" />
 
+    <TextView
+        android:id="@+id/textButton"
+        android:layout_width="221dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iconLED1" />
+
+    <TextView
+        android:id="@+id/textNL"
+        android:layout_width="221dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textButton" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CheckBox"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textNL" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

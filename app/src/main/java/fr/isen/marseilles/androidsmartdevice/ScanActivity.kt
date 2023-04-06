@@ -103,7 +103,7 @@ class ScanActivity : AppCompatActivity() {
     }
     companion object{
         val PERMISSION_REQUEST_CODE =1
-        val SCAN_PERIOD : Long = 10000
+        val SCAN_PERIOD : Long = 10000000
     }
 
 
