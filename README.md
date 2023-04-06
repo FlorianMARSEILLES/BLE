@@ -37,6 +37,7 @@ Pour utiliser l'application, suivez ces étapes :
 - Une fois connecté, vous pouvez contrôler les LED et les boutons sur la carte STM32 en utilisant les boutons de l'application.
 
 Contribution
+
 Les contributions à ce projet sont les bienvenues. Pour contribuer, veuillez créer une pull request et expliquer en détail les modifications apportées.
 
 
