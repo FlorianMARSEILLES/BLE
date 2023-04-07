@@ -17,7 +17,7 @@ import android.bluetooth.*
 import android.widget.CheckBox
 import org.w3c.dom.Text
 import java.util.*
-
+//
 class DeviceActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId", "MissingPermission")
     private var bluetoothGatt: BluetoothGatt? = null
