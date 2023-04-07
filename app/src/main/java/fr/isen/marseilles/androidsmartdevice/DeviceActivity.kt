@@ -24,7 +24,7 @@ class DeviceActivity : AppCompatActivity() {
     private val serviceUUID = UUID.fromString("0000feed-cc7a-482a-984a-7f2ed5b3e58f")
     private val characteristicLedUUID = UUID.fromString("0000abcd-8e22-4541-9d4c-21edae82ed19")
     private val characteristicButtonUUID = UUID.fromString("00001234-8e22-4541-9d4c-21edae82ed19")
-    private var cptClick=0 //utilisé pour la partie compteur que je n'ai pas réussi à achever
+    //private var cptClick=0 //utilisé pour la partie compteur que je n'ai pas réussi à achever
     @SuppressLint("MissingPermission", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +48,7 @@ class DeviceActivity : AppCompatActivity() {
     }
     @SuppressLint("MissingPermission")
     private fun setLedColor(){
+
         val iconLED1 = findViewById<ImageView>(R.id.iconLED1)
         val iconLED2 = findViewById<ImageView>(R.id.iconLED2)
         val iconLED3 = findViewById<ImageView>(R.id.iconLED3)
@@ -123,6 +124,33 @@ class DeviceActivity : AppCompatActivity() {
                 bluetoothGatt?.discoverServices()
             }
         }
+        @SuppressLint("MissingPermission")
+        override fun onServicesDiscovered(bluetoothGatt: BluetoothGatt?, status: Int) {
+            super.onServicesDiscovered(bluetoothGatt, status)
+            if (status == BluetoothGatt.GATT_SUCCESS) {
+// Enable notifications for the desired characteristic
+                val characteristicButton3 = bluetoothGatt?.getService(serviceUUID)?.getCharacteristic(characteristicButtonUUID)
+                bluetoothGatt?.setCharacteristicNotification(characteristicButton3, true)
+                characteristicButton3?.descriptors?.forEach { descriptor ->
+                    descriptor.value = BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE
+                    bluetoothGatt.writeDescriptor(descriptor)
+                }
+            }
+        }
+
+        @SuppressLint("SetTextI18n")
+        override fun onCharacteristicChanged(gatt: BluetoothGatt, characteristic: BluetoothGattCharacteristic) {
+            super.onCharacteristicChanged(gatt, characteristic)
+            val textB = findViewById<TextView>(R.id.textButton)
+            textB.text = "Vous n'avez pas cliqué sur un boutton "
+            if (characteristic.uuid == characteristicButtonUUID) {
+                val value = characteristic.value
+                val clicks = value[0].toInt()
+                runOnUiThread {
+                    textB.text = "Nombre de click: ${clicks.toString()}"
+                }
+            }
+        }
 
     }
 
@@ -132,12 +160,15 @@ class DeviceActivity : AppCompatActivity() {
         val iconLED2 = findViewById<ImageView>(R.id.iconLED2)
         val iconLED3 = findViewById<ImageView>(R.id.iconLED3)
         val textB = findViewById<TextView>(R.id.textButton)
-        textB.text = "Vous avez cliqué sur le boutton : "
+        textB.text = "Vous n'avez pas cliqué sur un boutton "
 
         val textNL = findViewById<TextView>(R.id.textNL)
         textNL.text = "Abonnez-vous a cette NewsLetter"
 
         val check = findViewById<CheckBox>(R.id.checkBox)
+        val textProgressing = findViewById<TextView>(R.id.textConnexionInProgress)
+        val str = intent.getParcelableExtra<BluetoothDevice>("device")
+        textProgressing.text = "Connecté à $str"
 
         check.isVisible = true
         iconLED1.isVisible = true
